@@ -1,0 +1,24 @@
+{
+  "name": "practice-of-vue",
+  "version": "1.0.0",
+  "description": "practice of vue",
+  "main": "index.js",
+  "dependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.24.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YedramKim/babel-and-webpack-practice.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YedramKim/babel-and-webpack-practice/issues"
+  },
+  "homepage": "https://github.com/YedramKim/babel-and-webpack-practice#readme"
+}
