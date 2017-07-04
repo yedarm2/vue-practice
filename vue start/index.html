@@ -9,7 +9,20 @@
 </head>
 <body>
 	<div id="app">
-		{{message | toUpper | double | addtion('ㅋㅋㅋㅋ', 'aaa')}}
+		<p>
+			원본 메세지: {{message}}
+		</p>
+		<p>
+			뒤집힌 메세지: {{reverseMessage}}
+		</p>
+		<p>
+			합쳐진 메세지: {{sumMessage}}
+		</p>
+		<p>
+			필터 사용:
+			{{message | toUpper | addtion('ㅋㅋㅋㅋ', 'aaa')}}
+		</p>
+		<my-component prop1="message"></my-component>
 	</div>
 	<script src="./src.js"></script>
 </body>
