@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<script src="./vue.js"></script>
+</head>
+<body>
+	<div class="list">
+		<h1>리스트 렌더링</h1>
+		<ul>
+			<li v-for="obj in array">
+				{{obj.num}}
+			</li>
+			<li v-for="(obj, idx) of array">
+				{{idx}} - num:{{obj.num}}
+			</li>
+		</ul>
+		<div>
+			<template v-for="(obj, index) of array" v-if="obj.active">
+				<p>
+					{{obj.num}}
+				</p>
+				<hr>
+			</template>
+		</div>
+		<p v-for="(item, key, index) in obj">
+			{{index}} of obj : {{key}}
+			 - value : {{item}}
+		</p>
+		<hr v-for="n in 10" :title="n">
+	</div>
+	<div id="todo">
+		<input type="text" v-model="newTodoText" @keyup.enter="addTodoList" placeholder="Add a todo">
+		<ul>
+			<li is="todo-list"
+				v-for="(todo, idx) in todoList"
+				:key="todo"
+				:title="todo"
+				@remove="todoList.splice(idx, 1)"
+			></li>
+		</ul>
+	</div>
+	<div id="event">
+		<h1>이벤트 핸들링</h1>
+		<p>
+			버튼 클릭 횟수: {{count}}
+			<button @click="count += 1">plus</button>
+		</p>
+		<button @click="say('hello, Vue', $event)"> <span @click="say('hello2')">ss</span>event1</button>
+		<button @click="say('Thanks, Vue', $event.target)">event2</button>
+		<div @click.ctrl="showEventInfo">
+			0
+			<div class="per-1">
+				1
+				<div class="per-2">
+					2
+					<div class="per-3">
+						3
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="input">
+		<h1>폼 입력 바인딩</h1>
+		<input @input="message = $event.target.value">
+		<div>
+			{{message}}
+		</div>
+		<div>
+			<label>
+				<input type="checkbox" v-model="check">
+				{{check}}
+			</label>
+		</div>
+		<div>
+			<label>
+				<input type="checkbox" value="check1" v-model="checks">
+				check1
+			</label>
+			<label>
+				<input type="checkbox" value="check2" v-model="checks">
+				check2
+			</label>
+			<label>
+				<input type="checkbox" value="check3" v-model="checks">
+				check3
+			</label>
+			<p>
+				checks: {{checks}}
+			</p>
+		</div>
+		<div>
+			<label>
+				<input type="radio" value="radio1" v-model="radio">
+				radio1
+			</label>
+			<label>
+				<input type="radio" value="radio2" v-model="radio">
+				radio2
+			</label>
+			<p>
+				radio: {{radio}}
+			</p>
+		</div>
+		<div>
+			<select v-model="select" multiple>
+				<option value="A">a</option>
+				<option value="B">b</option>
+				<option value="C">c</option>
+				<option value="D">d</option>
+			</select>
+			<p>
+				select: {{select}}
+			</p>
+			<input type="checkbox" v-model="bindValue" :true-value="trueValue"
+			:false-value="falseValue">
+			<p>bindValue: {{bindValue}}</p>
+		</div>
+		<div>
+			<input type="text" v-model.number="number">
+		</div>
+	</div>
+	<input type="checkbox" name="" id="ds">
+	<script src="./src2.js"></script>
+</body>
+</html>
