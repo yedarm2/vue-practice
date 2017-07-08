@@ -23,6 +23,46 @@
 			{{message | toUpper | addtion('ㅋㅋㅋㅋ', 'aaa')}}
 		</p>
 		<my-component prop1="message"></my-component>
+		<h1>클래스와 스타일</h1>
+		<div class="df" :class="{
+			active: isActive
+		}">
+			클래스 테스트1
+		</div>
+		<div :class="classObj">
+			클래스 테스트2 (computed 속성 이용가능)
+		</div>
+		<my-component :class="[class1, class2, {active: isActive}]">
+			클래스 테스트3
+		</my-component>
+		<div :style="styleObj">
+			스타일 테스트1
+		</div>
+		<div :style="[styleWord1, styleWord2]">
+			스타일 테스트2
+		</div>
+		<div :style="{ display: ['-webkit-box', '-ms-flexbox', 'flex'] }">
+			스타일 테스트3
+		</div>
+		<h1>조건부 렌더링</h1>
+		<div v-if="isRender">
+			Yes
+			<input type="text" key="username-input">
+		</div>
+		<div v-else>
+			No
+			<input type="text" key="email-input">
+		</div>
+		<template v-if="templateRendering">
+			<h3>템플릿을</h3>
+			<h4>이용한</h4>
+			<h5>조건부 렌더링</h5>
+		</template>
+		<p v-show="showshowshow">
+			v-show 사용
+		</p>
+		<h1>리스트 렌더링</h1>
+		
 	</div>
 	<script src="./src.js"></script>
 </body>
