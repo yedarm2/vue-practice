@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<script src="./vue.js"></script>
+</head>
+<body>
+<div id="app">
+	<h1>컴포넌트</h1>
+	<my-component @custom-event="method1" :message-by-parent="message">
+		<p slot="slot">Hey slot!!</p>
+		<p>Hey slot!!zz</p>
+	</my-component>
+	<!--이 my-message는 문자열이 아닌 숫자가 전송됩니다.-->
+	<!-- 컴포넌트에서 네이티브 이벤트를 수신할 경우에는  .native 수식어가 필요합니다. -->
+	<my-component @click.native="method2"></my-component>
+	<component :is="cName">동적 컴포넌트</component>
+	<p v-for="item in array" ref="for">
+		{{item}}
+	</p>
+</div>
+	<script src="./component.js"></script>
+</body>
+</html>
