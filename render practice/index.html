@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<script src="./vue.js"></script>
+	<style>
+		div {
+			padding: 10px;
+		}
+		.div1 {
+			background: red;
+		}
+
+		.div2 {
+			background-color: gold;
+		}
+	</style>
+</head>
+<body>
+<div id="app">
+	<anchor-header :level="level">Hello, render!! my name is yedarm</anchor-header>
+	<div class="div1" @click="method1">
+		<div class="div2"></div>
+	</div>
+	<jsx-render></jsx-render>
+	<input type="text" v-focus="1+1">
+</div>
+<script src="./render-compile.js"></script>
+</body>
+</html>
