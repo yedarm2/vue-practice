@@ -17,6 +17,7 @@ module.exports = {
 				options: {
 					loaders: {
 						'css': 'vue-style-loader!css-loader',
+						'css': ExtractTextPlugin.extract('css'),
 						'less': 'vue-style-loader!css-loader!less-loader',
 						'ts': 'ts-loader'
 					}
@@ -49,6 +50,11 @@ module.exports = {
 	performance: {
 		hints: false
 	},
+	plugins: [
+		new ExtractTextPlugin({
+			filename: 'style.css'
+		})
+	],
 	devtool: '#eval-source-map'
 }
 

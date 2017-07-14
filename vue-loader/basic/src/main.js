@@ -11,4 +11,3 @@ new Vue({
 		VuexApp
 	}
 });
-console.log(store);
