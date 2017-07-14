@@ -6,7 +6,7 @@ let vm = new Vue({
 	directives: {
 		focus: {
 			inserted(el, binding, vnode, ...props) {
-				console.log(binding);
+				console.log(vnode);
 				if (binding.modifiers.bind) {
 					el.value = binding.value;
 				}
