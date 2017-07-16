@@ -1,13 +1,14 @@
 import Vue from 'vue';
-import VuexComponent from './vuex-component.vue';
-import store from './store.js';
+import VuexApp from './components/vuex-app.vue';
+import store from './store/store';
 
 new Vue({
 	el: '#app',
 	store,
 	name: 'app-start',
-	render: h => <vuex-component></vuex-component>,
+	render: h => <vuex-app></vuex-app>,
 	components: {
-		VuexComponent
+		VuexApp
 	}
 });
+console.log(store);
