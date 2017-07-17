@@ -7,15 +7,22 @@
             <h1>
                 <router-link to="/sub">서브 페이지</router-link>
             </h1>
+            <p>
+                {{$route.hash}}
+            </p>
         </header>
+        <p>
+            <a @click.prevent="$router.push('/')" href="#">push 링크</a>
+            <a @click.prevent="$router.push({path: '/sub', query: {'aa': 123}})" href="#">push 링크(??)</a>
+            <a @click.prevent="$router.push({name: 'sub', params: {title: 'dfdf'}})" href="#">sub 페이지</a>
+            <a @click.prevent="$router.go(-10)" href="#">뒤로</a>
+        </p>
         <router-view></router-view>
     </div>
 </template>
 
 <script>
-import router from '../route/route.js';
 export default {
-    router
 }
 </script>
 

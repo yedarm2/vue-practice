@@ -1,9 +1,7 @@
 <template>
 	<div>
 		This is sub page.
-		<div>
-			{{$route.params.title}}
-		</div>
+		<router-view></router-view>
 	</div>
 </template>
 

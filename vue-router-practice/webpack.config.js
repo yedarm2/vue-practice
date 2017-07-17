@@ -1,5 +1,27 @@
-var path = require('path')
-var webpack = require('webpack')
+let path = require('path');
+let webpack = require('webpack');
+let isProduction = process.env.NODE_ENV === 'production';
+let ExtractTextPlugin = require("extract-text-webpack-plugin");
+let generateStyleLoaders = (style, isProduction) => {
+	let styles = ['css-loader'];
+	if (style) {
+		styles.push(`${style}-loader`);
+	}
+
+	if (isProduction) {
+		console.log('is product', styles);
+		console.log(ExtractTextPlugin.extract({
+			use: styles,
+			fallback: 'vue-style-loader'
+		}));
+		return ExtractTextPlugin.extract({
+			use: styles,
+			fallback: 'vue-style-loader'
+		});
+	} else {
+		return ['vue-style-loader'].concat(styles);
+	}
+};
 
 module.exports = {
 	entry: './src/main.js',
@@ -15,9 +37,10 @@ module.exports = {
 				loader: 'vue-loader',
 				options: {
 					loaders: {
-						'css': 'vue-style-loader!css-loader',
-						'less': 'vue-style-loader!css-loader!less-loader'
-					}
+						'css': generateStyleLoaders(false, isProduction),
+						'less': generateStyleLoaders('less', isProduction)
+					},
+					sourceMap: isProduction
 					// other vue-loader options go here
 				}
 			},
@@ -47,13 +70,19 @@ module.exports = {
 	performance: {
 		hints: false
 	},
+	plugins: [
+	],
 	devtool: '#eval-source-map'
-}
+};
 
 if (process.env.NODE_ENV === 'production') {
-	module.exports.devtool = '#source-map'
+	module.exports.devtool = '#source-map';
+
 	// http://vue-loader.vuejs.org/en/workflow/production.html
 	module.exports.plugins = (module.exports.plugins || []).concat([
+		new ExtractTextPlugin({
+			filename: 'style.css'
+		}),
 		new webpack.DefinePlugin({
 			'process.env': {
 				NODE_ENV: '"production"'

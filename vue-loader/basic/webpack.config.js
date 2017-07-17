@@ -55,15 +55,7 @@ module.exports = {
 				options: {
 					name: '[name].[ext]'
 				}
-			},
-			// {
-			// 	test: /\.css$/,
-			// 	use: generateStyleLoaders(false, isProduction)
-			// },
-			// {
-			// 	test: /\.less$/,
-			// 	use: generateStyleLoaders('less', isProduction)
-			// }
+			}
 		]
 	},
 	resolve: {
