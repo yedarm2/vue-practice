@@ -1,15 +1,19 @@
 <template>
 	<div>
 		This is sub page.
-		<router-view></router-view>
+		<transition>
+			<keep-alive>
+				<router-view></router-view>
+			</keep-alive>
+		</transition>
 	</div>
 </template>
 
 <script>
 export default {
-    watch: {
+	watch: {
 		'$route'(to, from) {
-			console.log(`move ${from.params.title} -> ${to.params.title}`);
+			console.log(`move ${from.path} -> ${to.path}`);
 		}
 	}
 }

@@ -9,11 +9,6 @@ let generateStyleLoaders = (style, isProduction) => {
 	}
 
 	if (isProduction) {
-		console.log('is product', styles);
-		console.log(ExtractTextPlugin.extract({
-			use: styles,
-			fallback: 'vue-style-loader'
-		}));
 		return ExtractTextPlugin.extract({
 			use: styles,
 			fallback: 'vue-style-loader'
@@ -24,7 +19,9 @@ let generateStyleLoaders = (style, isProduction) => {
 };
 
 module.exports = {
-	entry: './src/main.js',
+	entry: {
+        index: './src/main.js'
+    },
 	output: {
 		path: path.resolve(__dirname, './dist'),
 		publicPath: '/dist/',
@@ -89,7 +86,7 @@ if (process.env.NODE_ENV === 'production') {
 			}
 		}),
 		new webpack.optimize.UglifyJsPlugin({
-			sourceMap: true,
+			sourceMap: false,
 			compress: {
 				warnings: false
 			}

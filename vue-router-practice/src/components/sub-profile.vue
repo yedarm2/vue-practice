@@ -1,12 +1,12 @@
 <template>
 	<div>
-		{{$route.params.title}}의 프로파일
+		{{title}}의 프로파일
 	</div>
 </template>
 
 <script>
 export default {
-
+    props: ['title']
 }
 </script>
 
