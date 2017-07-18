@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
+  opacity: 0
+}
+</style>
+<script src="./vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <button @click="show = !show">
+        click
+    </button>
+    <transition name="fade">
+        <p v-if="fade">Hello, vue-transition!!</p>
+    </transition>
+</div>
+<script src="./src1.js"></script>
+</body>
+</html>
