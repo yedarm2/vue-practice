@@ -3,9 +3,19 @@ let webpack = require('webpack');
 let isProduction = process.env.NODE_ENV === 'production';
 let ExtractTextPlugin = require("extract-text-webpack-plugin");
 let generateStyleLoaders = (style, isProduction) => {
-	let styles = ['css-loader'];
+	let styles = [{
+		loader: 'css-loader',
+		options: {
+			sourceMap: false
+		}
+	}];
 	if (style) {
-		styles.push(`${style}-loader`);
+		styles.push({
+			loader: `${style}-loader`,
+			options: {
+				sourceMap: false
+			}
+		});
 	}
 
 	if (isProduction) {
@@ -20,8 +30,8 @@ let generateStyleLoaders = (style, isProduction) => {
 
 module.exports = {
 	entry: {
-        index: './src/main.js'
-    },
+		index: './src/main.js'
+	},
 	output: {
 		path: path.resolve(__dirname, './dist'),
 		publicPath: '/dist/',
@@ -37,7 +47,7 @@ module.exports = {
 						'css': generateStyleLoaders(false, isProduction),
 						'less': generateStyleLoaders('less', isProduction)
 					},
-					sourceMap: isProduction
+					sourceMap: false
 					// other vue-loader options go here
 				}
 			},

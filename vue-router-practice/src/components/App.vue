@@ -20,18 +20,22 @@
 						</p>
 						<div id="scroll">sdfas</div>
         </header>
-        <p>
+        <p ref="par">
             <a @click.prevent="$router.push('/')" href="#">push 링크</a>
             <a @click.prevent="$router.push({path: '/sub', query: {'aa': 123}})" href="#">push 링크(??)</a>
             <a @click.prevent="$router.push({name: 'sub', params: {title: 'dfdf'}})" href="#">sub 페이지</a>
             <a @click.prevent="$router.go(-1)" href="#">뒤로</a>
         </p>
-        <router-view></router-view>
+        <router-view ref="component"></router-view>
     </div>
 </template>
 
 <script>
 export default {
+	mounted() {
+		// console.log(this, 'mounted');
+		// console.log(this.$refs);
+	}
 }
 </script>
 
