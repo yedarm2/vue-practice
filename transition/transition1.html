@@ -9,7 +9,7 @@
 .fade-enter-active, .fade-leave-active {
   transition: opacity .5s
 }
-.fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
+.fade-enter, .fade-leave-to {
   opacity: 0
 }
 </style>
@@ -21,7 +21,7 @@
         click
     </button>
     <transition name="fade">
-        <p v-if="fade">Hello, vue-transition!!</p>
+        <p v-if="show">Hello, vue-transition!!</p>
     </transition>
 </div>
 <script src="./src1.js"></script>
