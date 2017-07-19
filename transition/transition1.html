@@ -1,28 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link href="https://unpkg.com/animate.css@3.5.1/animate.min.css" rel="stylesheet" type="text/css">
+	<title>Document</title>
 <style>
+#app {
+	width: 500px;
+	margin: 0 auto;
+}
+
 .fade-enter-active, .fade-leave-active {
-  transition: opacity .5s
+  transition: opacity .5s;
 }
 .fade-enter, .fade-leave-to {
   opacity: 0
+}
+
+.slide-fade-enter-active {
+	transition: all 0.5s ease;
+}
+.slide-fade-leave-active {
+	transition: all 0.5s cubic-bezier(1.0, 0.5, 0.8, 1.0);;
+}
+.slide-fade-leave-to {
+	transform: translateX(10px);
+	opacity: 0;
+}
+.slide-fade-enter {
+	transform: translateX(-10px);
+	opacity: 0;
+}
+.swap-span {
+	display: inline-block;
+	padding: 2px 5px;
+	border: 1px solid gold;
 }
 </style>
 <script src="./vue.js"></script>
 </head>
 <body>
 <div id="app">
-    <button @click="show = !show">
-        click
-    </button>
-    <transition name="fade">
-        <p v-if="show">Hello, vue-transition!!</p>
-    </transition>
+	<button @click="show = !show">
+		click
+	</button>
+	 <!-- <transition name="fade" appear>
+		<p v-show="show">Hello, vue-transition!!</p>
+	</transition> -->
+	<!-- <transition name="slide-fade" appear>
+		<p v-if="show" key="a">Hello, vue-transition!!</p>
+	</transition> -->
+	<div>
+		<transition name="slide-fade" appear mode="out-in">
+			<span class="swap-span" key="a" v-if="show">Hello, vue-transition!!</span>
+			<span class="swap-span" key="b" v-else>Hello, vue-transition!!2</span>
+		</transition>
+	</div>
+	<!-- <transition
+		name="custom-classes-transition"
+		enter-active-class="animated tada"
+		leave-active-class="animated flash"
+	>
+		<p v-if="show">Hello</p>
+	</transition>  -->
+	<!-- <transition
+		name="fade"
+		@before-enter="beforeEnter"
+		@enter="enter"
+		@after-enter="afterEnter"
+		@enter-canceled="enterCancelled"
+		
+		@before-leave="beforeLeave"
+		@leave="leave"
+		@after-leave="afterLeave"
+		@leave-canceled="leaveCancelled"
+	>
+		<p v-if="show">
+			javascript hook
+		</p>
+	</transition>  -->
 </div>
 <script src="./src1.js"></script>
 </body>

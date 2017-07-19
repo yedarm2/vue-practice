@@ -20,9 +20,6 @@ For detailed explanation on how things work, consult the [docs for vue-loader](h
 # 정리
 
 ## vuex-router-sync
-``` javascript
-
-```
 * vue-router 인스턴스를 vuex 인스턴스에 간단히 연결시켜주는 모듈입니다.
 
 ### 사용법
@@ -48,6 +45,6 @@ sync(store, router, options)
 * sync로 store와 router를 동기화 
 * sync 함수를 이용해서 동기화가 완료된 vuex 인스턴스는 router 인스턴스의 정보가 변화할 때 마다 `moduleName + 'ROUTE_CHANGED'` 변이를 발생시킵니다.
 
-### `moduleName + 'ROUTE_CHANGED'`(state, payload)
+### `moduleName + '/ROUTE_CHANGED'`(state, payload)
 * 라우트 인스턴스가 변경이 되어서 vue 인스턴스의 변경이 생긴뒤에 발생하는 변이입니다.
 * payload에는 to와 from 두 객체가 들어 있습니다.
