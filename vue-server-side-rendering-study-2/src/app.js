@@ -1,14 +1,17 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-import App from './components/app.vue';
-import createRouter from './createRouter';
+const Vue = require('vue');
+const Vuex = require('vuex');
+// let App = require('./components/app.vue');
+const createRouter = require('./createRouter');
+const App = require('./components/app.components');
 
-export default function createApp(context) {
+function createApp(context) {
 	const router = createRouter(),
 		app = new Vue({
 			render: h => h(App),
 			router
 		});
 
-	return {app};
+	return {app, router};
 }
+
+module.exports = createApp;

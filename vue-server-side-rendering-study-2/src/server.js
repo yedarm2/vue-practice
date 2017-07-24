@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-const createBundleRenderer = require('vue-server-renderer').createBundleRenderer;
+const {createBundleRenderer, createRenderer} = require('vue-server-renderer');
 const template = `
 <!DOCTYPE html>
 <html lang="en">
@@ -16,25 +16,44 @@ const template = `
 </body>
 </html>
 `;
-const renderer = createBundleRenderer(path.join(__dirname, '..', 'dist', 'vue-ssr-server-bundle.json'), {
-	template,
-	runInNewContext: false
+const renderer = createRenderer({
+	template
 });
+// const bundleRenderer = createBundleRenderer(path.join(__dirname, '..', 'dist', 'vue-ssr-server-bundle.json'), {
+// 	template,
+// 	runInNewContext: false
+// });
+// let createApp = require('../dist/app.js').default;
+let createApp = require('./entry-server.js');
 
 app.get('*', (req, res) => {
 	const context = {
 		url: req.url
 	};
-	createApp(context).then((app) => {
-		renderer.renderToString(app, (err, html) => {
+	createApp(context).then((vm) => {
+		renderer.renderToString(vm, (err, html) => {
 			if (err) {
-				console.log('에러발생?!');
+				console.log('만세 에러다!!!!!!!!!!!!');
+				console.log(err);
 				res.status(404).send('에러');
 			} else {
 				res.send(html);
 			}
-		})
+		});
+	}).catch((err) => {
+		console.log('promise error');
+		console.log(err);
 	});
+
+	// bundleRenderer.renderToString(context, (err, html) => {
+	// 	if (err) {
+	// 		console.log('에러발생?!1');
+	// 		console.log(err);
+	// 		res.status(404).send('에러');
+	// 	} else {
+	// 		res.send(html);
+	// 	}
+	// });
 });
 
 app.listen(8080, () => {

@@ -1,3 +1,10 @@
+<docs>
+## test
+* markdown test
+
+* perpect
+</docs>
+
 <template>
 	<div @click="method">
 		<p>
@@ -42,7 +49,7 @@ export default {
 };
 </script>
 
-<style scoped lang="less">
+<style>
 * {
 	-webkit-user-select: none;
 	-moz-user-select: none;

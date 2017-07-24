@@ -1,7 +1,7 @@
-import createApp from './app';
+let createApp = require('./app');
 
-export default context => {
-	return new Promise((res, rej) => {
+module.exports = context => {
+	return new Promise((resolve, reject) => {
 		const {app, router} = createApp();
 		router.push(context.url);
 		router.onReady(() => {
@@ -12,6 +12,6 @@ export default context => {
 				return reject({code:404});
 			}
 			resolve(app);
-		}, rej);
+		}, reject);
 	});
 };

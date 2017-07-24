@@ -1,11 +1,21 @@
-import Vue from 'vue';
-import Router from 'vue-router';
+const Vue = require('vue');
+const Router = require('vue-router');
 Vue.use(Router);
 
 const routes = [
-	
+	{
+		path: '/',
+		component: {
+			name: 'app',
+			template: `
+<div class="vue-app">
+	This is ssr app.
+</div>
+`
+		}
+	}
 ];
-export default function createRouter() {
+module.exports =  function createRouter() {
 	return new Router({
 		mode: 'history',
 		routes

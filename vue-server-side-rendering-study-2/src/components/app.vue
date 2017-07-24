@@ -11,5 +11,7 @@ export default {
 </script>
 
 <style>
-
+.vue-app {
+	font-weight: bold;
+}
 </style>
