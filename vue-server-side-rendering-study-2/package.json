@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
-    "server": "node ./src/entry-server.js",
+    "server": "node ./src/server.js",
     "dev-after-server": "yarn build && yarn server"
   },
   "dependencies": {
@@ -29,7 +29,8 @@
     "vue-loader": "^12.1.0",
     "vue-template-compiler": "^2.3.3",
     "webpack": "^2.6.1",
-    "webpack-dev-server": "^2.4.5"
+    "webpack-dev-server": "^2.4.5",
+    "webpack-node-externals": "^1.6.0"
   },
   "main": "index.js",
   "license": "MIT"

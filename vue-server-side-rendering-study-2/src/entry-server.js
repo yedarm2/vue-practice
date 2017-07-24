@@ -1,41 +1,17 @@
-const express = require('express');
-const createApp = require('../dist/app');
-const app = express();
-const template = `
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Vue SSR</title>
-</head>
-<body>
-	<!--vue-ssr-outlet-->
-</body>
-</html>
-`;
-const renderer = require('vue-server-renderer').createRenderer({
-	template
-});
+import createApp from './app';
 
-app.get('*', (req, res) => {
-	const context = {
-		url: req.url
-	},
-	{app} = createApp(context);
+export default context => {
+	return new Promise((res, rej) => {
+		const {app, router} = createApp();
+		router.push(context.url);
+		router.onReady(() => {
+			const matchedComponents = router.getMatchedComponents();
 
-	renderer.renderToString(app, (err, html) => {
-		if (err) {
-			console.log('에러 발생!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-			console.log(err);
-			console.log('에러의 원인.....................');
-		} else {
-			res.send('html');
-		}
+			if (!matchedComponents.length) {
+				console.log('클라이언트가 존재하지 않는 사이트를 요청했습니다.', context.url);
+				return reject({code:404});
+			}
+			resolve(app);
+		}, rej);
 	});
-});
-
-app.listen(8080, () => {
-	console.log('vue ssr 서버 실행....');
-});
+};

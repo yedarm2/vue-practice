@@ -1,5 +1,7 @@
 var path = require('path')
-var webpack = require('webpack')
+var webpack = require('webpack');
+const nodeExternals = require('webpack-node-externals');
+const vueSSRServerPlugin = require('vue-server-renderer/server-plugin');
 
 module.exports = {
   entry: './src/entry-server.js',
@@ -10,6 +12,9 @@ module.exports = {
 		libraryTarget: 'commonjs2'
 	},
 	target: 'node',
+	externals: {
+		whitelist: /\.css$/
+	},
   module: {
     rules: [
       {
@@ -47,7 +52,10 @@ module.exports = {
   performance: {
     hints: false
   },
-  devtool: '#eval-source-map'
+	devtool: '#eval-source-map',
+	plugins: [
+		new vueSSRServerPlugin()
+	]
 }
 
 if (process.env.NODE_ENV === 'production') {
