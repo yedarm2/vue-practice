@@ -19,6 +19,7 @@ let generateStyleLoaders = (style, isProduction) => {
 		return ['vue-style-loader'].concat(styles);
 	}
 };
+const docsExtract = new ExtractTextPlugin('docs.md');
 
 module.exports = {
 	entry: './src/main.js',
@@ -36,7 +37,7 @@ module.exports = {
 					loaders: {
 						'css': generateStyleLoaders(false, isProduction),
 						// 'less': generateStyleLoaders('less', isProduction)
-						'docs': isProduction ? ExtractTextPlugin.extract('raw-loader') : ''
+						'docs': isProduction ? docsExtract.extract('raw-loader') : ''
 					},
 					sourceMap: isProduction
 					// other vue-loader options go here
@@ -81,9 +82,7 @@ if (process.env.NODE_ENV === 'production') {
 		new ExtractTextPlugin({
 			filename: 'style.css'
 		}),
-		new ExtractTextPlugin({
-			filename: 'docs.md'
-		}),
+		docsExtract,
 		new webpack.DefinePlugin({
 			'process.env': {
 				NODE_ENV: '"production"'
