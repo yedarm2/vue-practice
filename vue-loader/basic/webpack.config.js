@@ -1,25 +1,11 @@
 let path = require('path');
 let webpack = require('webpack');
 let isProduction = process.env.NODE_ENV === 'production';
-let ExtractTextPlugin = require("extract-text-webpack-plugin");
-let generateStyleLoaders = (style, isProduction) => {
-	let styles = ['css-loader'];
-	if (style) {
-		styles.push(`${style}-loader`);
-	}
-
-	if (isProduction) {
-		return ExtractTextPlugin.extract({
-			use: styles,
-			fallback: 'vue-style-loader'
-		});
-	} else {
-		console.log('-------------');
-		console.log(['vue-style-loader'].concat(styles));
-		return ['vue-style-loader'].concat(styles);
-	}
-};
-const docsExtract = new ExtractTextPlugin('docs.md');
+const ExtractModule = require('./modules/extract-module');
+const docsExtract = new ExtractModule('docs.md');
+const styleExtract = new ExtractModule({
+	filename: 'style.css'
+});
 
 module.exports = {
 	entry: './src/main.js',
@@ -32,14 +18,25 @@ module.exports = {
 		rules: [
 			{
 				test: /\.vue$/,
+				enforce: 'pre',
+				loader: 'eslint-loader',
+				exclude: /node_modules/
+			},
+			{
+				test: /\.vue$/,
 				loader: 'vue-loader',
 				options: {
 					loaders: {
-						'css': generateStyleLoaders(false, isProduction),
-						// 'less': generateStyleLoaders('less', isProduction)
-						'docs': isProduction ? docsExtract.extract('raw-loader') : ''
-					},
-					sourceMap: isProduction
+						'css': styleExtract.extract({
+							loader: 'css-loader',
+							fallback: 'vue-style-loader'
+						}),
+						'less': styleExtract.extract({
+							loader: 'css-loader!less-loader',
+							fallback: 'vue-style-loader'
+						}),
+						'docs': docsExtract.extract('raw-loader')
+					}
 					// other vue-loader options go here
 				}
 			},
@@ -79,10 +76,8 @@ if (process.env.NODE_ENV === 'production') {
 
 	// http://vue-loader.vuejs.org/en/workflow/production.html
 	module.exports.plugins = (module.exports.plugins || []).concat([
-		new ExtractTextPlugin({
-			filename: 'style.css'
-		}),
-		docsExtract,
+		styleExtract.getPlugin(),
+		docsExtract.getPlugin(),
 		new webpack.DefinePlugin({
 			'process.env': {
 				NODE_ENV: '"production"'

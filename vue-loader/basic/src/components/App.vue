@@ -1,6 +1,10 @@
+<docs>
+	Hello, vue-loader documents
+</docs>
+
 <template>
 	<div id="app">
-		<img src="./assets/logo.png">
+		<img src="../assets/logo.png">
 		<h1></h1>
 		<h2>Essential Links</h2>
 		<ul>
@@ -9,7 +13,7 @@
 			<li><a href="https://gitter.im/vuejs/vue" target="_blank">Gitter Chat</a></li>
 			<li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
 		</ul>
-		<h2>Ecosystem</h2>
+		<h2>Ecosystem {{number}}</h2>
 		<vue-links></vue-links>
 		<p v-for="({id, text}, idx) in array" :key="idx" >
 			{{id}} {{text}}
@@ -18,12 +22,14 @@
 </template>
 
 <script>
-import VueLinks from './vue-links.vue'
+import VueLinks from './vue-links.vue';
 
+let num = 100;
 export default {
 	name: 'app',
 	data () {
 		return {
+			number: num,
 			msg: 'Welcome to Your Vue.js App',
 			array: [
 				{
@@ -35,15 +41,15 @@ export default {
 					text: 'String'
 				}
 			]
-		}
+		};
 	},
 	components: {
 		VueLinks
 	}
-}
+};
 </script>
 
-<style>
+<style lang="less">
 #app {
 	font-family: 'Avenir', Helvetica, Arial, sans-serif;
 	-webkit-font-smoothing: antialiased;
@@ -60,11 +66,10 @@ h1, h2 {
 ul {
 	list-style-type: none;
 	padding: 0;
-}
-
-li {
-	display: inline-block;
-	margin: 0 10px;
+	li {
+		display: inline-block;
+		margin: 0 10px;
+	}
 }
 
 a {
