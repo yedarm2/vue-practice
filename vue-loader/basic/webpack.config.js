@@ -7,6 +7,21 @@ const styleExtract = new ExtractModule({
 	filename: 'style.css'
 });
 
+	if (isProduction) {
+		return ExtractTextPlugin.extract({
+			use: styles,
+			fallback: 'vue-style-loader'
+		});
+	} else {
+		console.log('-------------');
+		console.log(['vue-style-loader'].concat(styles));
+		return ['vue-style-loader'].concat(styles);
+	}
+};
+const docsExtract = new ExtractTextPlugin('docs.md');
+const lessExtract = new ExtractTextPlugin('less.css');
+const styleExtract = new ExtractTextPlugin('style.css');
+
 module.exports = {
 	entry: './src/main.js',
 	output: {
@@ -27,16 +42,11 @@ module.exports = {
 				loader: 'vue-loader',
 				options: {
 					loaders: {
-						'css': styleExtract.extract({
-							loader: 'css-loader',
-							fallback: 'vue-style-loader'
-						}),
-						'less': styleExtract.extract({
-							loader: 'css-loader!less-loader',
-							fallback: 'vue-style-loader'
-						}),
-						'docs': docsExtract.extract('raw-loader')
-					}
+						'css': generateStyleLoaders(false, isProduction),
+						// 'less': generateStyleLoaders('less', isProduction)
+						'docs': isProduction ? docsExtract.extract('raw-loader') : ''
+					},
+					sourceMap: isProduction
 					// other vue-loader options go here
 				}
 			},
@@ -76,8 +86,10 @@ if (process.env.NODE_ENV === 'production') {
 
 	// http://vue-loader.vuejs.org/en/workflow/production.html
 	module.exports.plugins = (module.exports.plugins || []).concat([
-		styleExtract.getPlugin(),
-		docsExtract.getPlugin(),
+		new ExtractTextPlugin({
+			filename: 'style.css'
+		}),
+		docsExtract,
 		new webpack.DefinePlugin({
 			'process.env': {
 				NODE_ENV: '"production"'
