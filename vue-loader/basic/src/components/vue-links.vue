@@ -8,16 +8,21 @@
 </template>
 
 <script>
-import TypeScript from './typescript.vue'
 export default {
 	name: 'vue-links',
 	created() {
-		console.log(this.$style);
+		window.func1 = this.func;
+	},
+	methods: {
+		func(props) {
+			let {num1, num2} = props;
+			return num1 + num2;
+		}
 	}
-}
+};
 </script>
 
-<style lang="less" scoped>
+<style scoped>
 ul{
 	list-style-type: none;
 	padding: 0;
