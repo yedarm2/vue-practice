@@ -4,6 +4,7 @@
   "description": "practice of vue",
   "main": "index.js",
   "dependencies": {
+    "@vue/cli": "^4.5.8",
     "babel-cli": "^6.24.1",
     "babel-core": "^6.24.1"
   },
