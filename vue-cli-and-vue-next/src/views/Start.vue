@@ -4,7 +4,7 @@
 		<span v-once>
 			once: {{ counter }}
 		</span>
-		<component-a abc="asas" @click="func1" @input="func1" />
+		<component-a abc="asas" @click="func1" @input="func1" @abc-event-callback="func1" />
 	</div>
 </template>
 

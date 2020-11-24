@@ -2,6 +2,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import Home from '../views/Home.vue';
 import Start from '../views/Start.vue';
 import Teleport from '../views/Teleport.vue';
+import Reactivity from '../views/Reactivity.vue';
 
 const routes: Array<RouteRecordRaw> = [
 	{
@@ -24,6 +25,10 @@ const routes: Array<RouteRecordRaw> = [
 	{
 		path: '/teleport',
 		component: Teleport,
+	},
+	{
+		path: '/reactivity',
+		component: Reactivity,
 	},
 ];
 
